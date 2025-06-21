@@ -1,0 +1,20 @@
+[
+    {
+        "nome": "Yoshi's Woolly World",
+        "console": "Wii U",
+        "descricao": "Um charmoso jogo de plataforma onde tudo, inclusive o Yoshi, é feito de lã. Uma joia visual que poucos jogaram.",
+        "imagem": ""
+    },
+    {
+        "nome": "Eternal Darkness: Sanity's Requiem",
+        "console": "GameCube",
+        "descricao": "Um aclamado jogo de terror psicológico com mecânicas de 'insanidade' que quebravam a quarta parede de formas geniais.",
+        "imagem": ""
+    },
+    {
+        "nome": "Super Mario RPG: Legend of the Seven Stars",
+        "console": "Super Nintendo",
+        "descricao": "A primeira aventura de RPG do Mario, uma colaboração única entre a Nintendo e a Square. Sua versão original nunca saiu do SNES.",
+        "imagem": ""
+    }
+]
