@@ -16,5 +16,41 @@
         "console": "Super Nintendo",
         "descricao": "A primeira aventura de RPG do Mario, uma colaboração única entre a Nintendo e a Square. Sua versão original nunca saiu do SNES.",
         "imagem": ""
+    },
+    {
+        "nome": "Panzer Dragoon Saga",
+        "console": "Sega Saturn",
+        "descricao": "RPG cultuado com batalhas estratégicas em um mundo pós-apocalíptico. Até hoje nunca recebeu relançamento oficial completo.",
+        "imagem": ""
+    },
+    {
+        "nome": "Fable II",
+        "console": "Xbox 360",
+        "descricao": "Uma das aventuras mais queridas da Lionhead, com escolhas morais e mundo aberto. Continua preso ao Xbox 360.",
+        "imagem": ""
+    },
+    {
+        "nome": "Gravity Rush",
+        "console": "PlayStation Vita",
+        "descricao": "Aventura estilosa que brinca com gravidade e direção. O original segue exclusivo do portátil da Sony.",
+        "imagem": ""
+    },
+    {
+        "nome": "Bloodborne",
+        "console": "PlayStation 4",
+        "descricao": "RPG de ação com atmosfera gótica e combates intensos. Ainda não recebeu port oficial para outras plataformas.",
+        "imagem": ""
+    },
+    {
+        "nome": "Xenoblade Chronicles X",
+        "console": "Wii U",
+        "descricao": "Exploração massiva em um planeta alienígena, com mechs e mapas enormes. Permanece exclusivo do Wii U.",
+        "imagem": ""
+    },
+    {
+        "nome": "The Last Story",
+        "console": "Wii",
+        "descricao": "RPG dirigido por Hironobu Sakaguchi com combates em tempo real e narrativa emocional. Nunca saiu oficialmente do Wii.",
+        "imagem": ""
     }
 ]
