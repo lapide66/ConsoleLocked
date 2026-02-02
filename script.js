@@ -2,6 +2,58 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const gameListContainer = document.getElementById('game-list');
+    const filterContainer = document.getElementById('console-filters');
+
+    const normalizeConsoleName = (consoleName) => consoleName.trim();
+    const setActiveFilter = (activeButton) => {
+        const buttons = filterContainer.querySelectorAll('.filter-button');
+        buttons.forEach(button => {
+            button.classList.toggle('is-active', button === activeButton);
+        });
+    };
+
+    const renderGames = (games) => {
+        gameListContainer.innerHTML = '';
+
+        if (games.length === 0) {
+            gameListContainer.innerHTML = '<p>Nenhum jogo encontrado para este console.</p>';
+            return;
+        }
+
+        games.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+
+            card.innerHTML = `
+                <h2>${game.nome}</h2>
+                <p class="console">Preso no: <strong>${game.console}</strong></p>
+                <p class="description">${game.descricao}</p>
+            `;
+
+            gameListContainer.appendChild(card);
+        });
+    };
+
+    const renderFilters = (games, onFilter) => {
+        const consoles = Array.from(new Set(games.map(game => normalizeConsoleName(game.console)))).sort();
+        const allConsoles = ['Todos', ...consoles];
+
+        filterContainer.innerHTML = '';
+        allConsoles.forEach((consoleName, index) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'filter-button';
+            button.textContent = consoleName;
+            if (index === 0) {
+                button.classList.add('is-active');
+            }
+            button.addEventListener('click', () => {
+                setActiveFilter(button);
+                onFilter(consoleName);
+            });
+            filterContainer.appendChild(button);
+        });
+    };
 
     // A função fetch() busca nosso arquivo JSON. É a maneira moderna de fazer requisições web.
     fetch('games.json')
@@ -14,23 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(games => {
-            // Agora que temos a lista de jogos, limpamos qualquer conteúdo que já estivesse lá
-            gameListContainer.innerHTML = ''; 
+            const normalizedGames = games.map(game => ({
+                ...game,
+                console: normalizeConsoleName(game.console)
+            }));
 
-            // Para cada jogo na nossa lista, criamos um card no HTML
-            games.forEach(game => {
-                const card = document.createElement('div');
-                card.className = 'game-card'; // Adiciona a classe CSS para estilização
+            renderGames(normalizedGames);
+            renderFilters(normalizedGames, (selectedConsole) => {
+                if (selectedConsole === 'Todos') {
+                    renderGames(normalizedGames);
+                    return;
+                }
 
-                // Usamos template literals (crases ``) para construir o HTML do card facilmente
-                card.innerHTML = `
-                    <h2>${game.nome}</h2>
-                    <p class="console">Preso no: <strong>${game.console}</strong></p>
-                    <p class="description">${game.descricao}</p>
-                `;
-
-                // Adicionamos o card recém-criado dentro do nosso container no HTML
-                gameListContainer.appendChild(card);
+                const filtered = normalizedGames.filter(game => game.console === selectedConsole);
+                renderGames(filtered);
             });
         })
         .catch(error => {
