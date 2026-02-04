@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erro ao buscar os jogos:', error);
             gameListContainer.innerHTML = `
                 <tr>
-                    <td colspan="3">Não foi possível carregar a lista de jogos. Tente novamente mais tarde.</td>
+                    <td colspan="4">Não foi possível carregar a lista de jogos. Tente novamente mais tarde.</td>
                 </tr>
             `;
         });
@@ -53,14 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
         gameListContainer.innerHTML = '';
 
         const sortedGames = [...gamesData].sort((a, b) => {
-            const valueA = a[sortState.column]?.toString().toLowerCase() ?? '';
-            const valueB = b[sortState.column]?.toString().toLowerCase() ?? '';
+            const valueA = a[sortState.column] ?? '';
+            const valueB = b[sortState.column] ?? '';
+            const directionMultiplier = sortState.direction === 'asc' ? 1 : -1;
 
-            if (valueA < valueB) {
-                return sortState.direction === 'asc' ? -1 : 1;
+            if (sortState.column === 'ano') {
+                return (Number(valueA) - Number(valueB)) * directionMultiplier;
             }
-            if (valueA > valueB) {
-                return sortState.direction === 'asc' ? 1 : -1;
+
+            const normalizedA = valueA.toString().toLowerCase();
+            const normalizedB = valueB.toString().toLowerCase();
+
+            if (normalizedA < normalizedB) {
+                return -1 * directionMultiplier;
+            }
+            if (normalizedA > normalizedB) {
+                return 1 * directionMultiplier;
             }
             return 0;
         });
@@ -74,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${game.nome}</td>
                 <td><strong>${game.console}</strong></td>
                 <td>${game.descricao}</td>
+                <td>${game.ano}</td>
             `;
 
             // Adicionamos a linha recém-criada dentro do corpo da tabela

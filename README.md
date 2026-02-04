@@ -7,7 +7,7 @@ Um site estático para listar jogos presos em seus consoles originais.
 - `index.html`: página principal.
 - `style.css`: estilos do site.
 - `script.js`: busca os dados em JSON e renderiza as linhas da tabela.
-- `games.json`: lista de jogos exibidos.
+- `games.json`: lista de jogos exibidos (inclui o ano de lançamento).
 
 ## Ordenação
 
