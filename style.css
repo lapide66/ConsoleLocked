@@ -44,6 +44,9 @@ footer {
     text-align: left;
     vertical-align: top;
 }
+.game-table th {
+    padding: 0;
+}
 .game-table thead {
     background-color: #0d6efd;
     color: #ffffff;
@@ -61,4 +64,34 @@ footer {
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.9em;
+}
+.sort-button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 16px;
+    cursor: pointer;
+    text-align: left;
+}
+.sort-button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: -4px;
+    border-radius: 6px;
+}
+.sort-indicator::after {
+    content: '';
+    font-size: 0.8em;
+    opacity: 0.9;
+}
+.sort-button[data-direction='asc'] .sort-indicator::after {
+    content: 'A-Z';
+}
+.sort-button[data-direction='desc'] .sort-indicator::after {
+    content: 'Z-A';
 }
