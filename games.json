@@ -2,54 +2,63 @@
     {
         "nome": "Yoshi's Woolly World",
         "console": "Wii U",
+        "ano": 2015,
         "descricao": "Um charmoso jogo de plataforma onde tudo, inclusive o Yoshi, é feito de lã. Uma joia visual que poucos jogaram.",
         "imagem": ""
     },
     {
         "nome": "Eternal Darkness: Sanity's Requiem",
         "console": "GameCube",
+        "ano": 2002,
         "descricao": "Um aclamado jogo de terror psicológico com mecânicas de 'insanidade' que quebravam a quarta parede de formas geniais.",
         "imagem": ""
     },
     {
         "nome": "Super Mario RPG: Legend of the Seven Stars",
         "console": "Super Nintendo",
+        "ano": 1996,
         "descricao": "A primeira aventura de RPG do Mario, uma colaboração única entre a Nintendo e a Square. Sua versão original nunca saiu do SNES.",
         "imagem": ""
     },
     {
         "nome": "Panzer Dragoon Saga",
         "console": "Sega Saturn",
+        "ano": 1998,
         "descricao": "RPG cultuado com batalhas estratégicas em um mundo pós-apocalíptico. Até hoje nunca recebeu relançamento oficial completo.",
         "imagem": ""
     },
     {
         "nome": "Fable II",
         "console": "Xbox 360",
+        "ano": 2008,
         "descricao": "Uma das aventuras mais queridas da Lionhead, com escolhas morais e mundo aberto. Continua preso ao Xbox 360.",
         "imagem": ""
     },
     {
         "nome": "Gravity Rush",
         "console": "PlayStation Vita",
+        "ano": 2012,
         "descricao": "Aventura estilosa que brinca com gravidade e direção. O original segue exclusivo do portátil da Sony.",
         "imagem": ""
     },
     {
         "nome": "Bloodborne",
         "console": "PlayStation 4",
+        "ano": 2015,
         "descricao": "RPG de ação com atmosfera gótica e combates intensos. Ainda não recebeu port oficial para outras plataformas.",
         "imagem": ""
     },
     {
         "nome": "Xenoblade Chronicles X",
         "console": "Wii U",
+        "ano": 2015,
         "descricao": "Exploração massiva em um planeta alienígena, com mechs e mapas enormes. Permanece exclusivo do Wii U.",
         "imagem": ""
     },
     {
         "nome": "The Last Story",
         "console": "Wii",
+        "ano": 2011,
         "descricao": "RPG dirigido por Hironobu Sakaguchi com combates em tempo real e narrativa emocional. Nunca saiu oficialmente do Wii.",
         "imagem": ""
     }

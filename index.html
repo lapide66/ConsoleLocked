@@ -12,8 +12,42 @@
         <p>Uma lista de jogos incríveis que nunca escaparam de suas plataformas originais.</p>
     </header>
 
-    <main id="game-list">
-        <p>Carregando jogos...</p>
+    <main>
+        <table class="game-table" aria-label="Lista de jogos presos em seus consoles originais">
+            <thead>
+                <tr>
+                    <th>
+                        <button class="sort-button" type="button" data-column="nome">
+                            Jogo
+                            <span class="sort-indicator" aria-hidden="true"></span>
+                        </button>
+                    </th>
+                    <th>
+                        <button class="sort-button" type="button" data-column="console">
+                            Console
+                            <span class="sort-indicator" aria-hidden="true"></span>
+                        </button>
+                    </th>
+                    <th>
+                        <button class="sort-button" type="button" data-column="descricao">
+                            Descrição
+                            <span class="sort-indicator" aria-hidden="true"></span>
+                        </button>
+                    </th>
+                    <th>
+                        <button class="sort-button" type="button" data-column="ano">
+                            Ano
+                            <span class="sort-indicator" aria-hidden="true"></span>
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="game-list">
+                <tr>
+                    <td colspan="4">Carregando jogos...</td>
+                </tr>
+            </tbody>
+        </table>
     </main>
 
     <footer>
