@@ -15,27 +15,30 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(games => {
             // Agora que temos a lista de jogos, limpamos qualquer conteúdo que já estivesse lá
-            gameListContainer.innerHTML = ''; 
+            gameListContainer.innerHTML = '';
 
-            // Para cada jogo na nossa lista, criamos um card no HTML
+            // Para cada jogo na nossa lista, criamos uma linha na tabela
             games.forEach(game => {
-                const card = document.createElement('div');
-                card.className = 'game-card'; // Adiciona a classe CSS para estilização
+                const row = document.createElement('tr');
 
-                // Usamos template literals (crases ``) para construir o HTML do card facilmente
-                card.innerHTML = `
-                    <h2>${game.nome}</h2>
-                    <p class="console">Preso no: <strong>${game.console}</strong></p>
-                    <p class="description">${game.descricao}</p>
+                // Usamos template literals (crases ``) para construir o HTML da linha facilmente
+                row.innerHTML = `
+                    <td>${game.nome}</td>
+                    <td><strong>${game.console}</strong></td>
+                    <td>${game.descricao}</td>
                 `;
 
-                // Adicionamos o card recém-criado dentro do nosso container no HTML
-                gameListContainer.appendChild(card);
+                // Adicionamos a linha recém-criada dentro do corpo da tabela
+                gameListContainer.appendChild(row);
             });
         })
         .catch(error => {
             // Se algo der errado (ex: arquivo não encontrado), mostramos um erro no console
             console.error('Erro ao buscar os jogos:', error);
-            gameListContainer.innerHTML = '<p>Não foi possível carregar a lista de jogos. Tente novamente mais tarde.</p>';
+            gameListContainer.innerHTML = `
+                <tr>
+                    <td colspan="3">Não foi possível carregar a lista de jogos. Tente novamente mais tarde.</td>
+                </tr>
+            `;
         });
 });
