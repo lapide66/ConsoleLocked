@@ -1,24 +1,29 @@
 # ConsoleLocked
 
-Um site estático para listar jogos presos em seus consoles originais.
+Site estatico para catalogar jogos marcantes que continuam presos aos seus consoles originais.
+
+## O que mudou na interface
+
+- Hero inicial com identidade visual mais forte.
+- Cards de destaque com metricas da colecao.
+- Busca por texto em tempo real.
+- Filtro por console.
+- Tabela com visual mais moderno e responsivo.
+- Ordenacao por coluna mantida.
 
 ## Estrutura do projeto
 
-- `index.html`: página principal.
-- `style.css`: estilos do site.
-- `script.js`: busca os dados em JSON e renderiza as linhas da tabela.
-- `games.json`: lista de jogos exibidos (inclui o ano de lançamento).
-
-## Ordenação
-
-A tabela permite ordenar os jogos clicando nos cabeçalhos. Cada clique alterna entre ordem alfabética de A-Z e Z-A para a coluna selecionada.
+- `index.html`: estrutura principal da pagina.
+- `style.css`: tema visual, layout responsivo e animacoes.
+- `script.js`: carregamento dos dados, filtros, metricas e ordenacao.
+- `games.json`: lista de jogos exibidos.
 
 ## Como executar localmente
 
-> Observação: é recomendado servir os arquivos via HTTP para que o `fetch` funcione corretamente.
+> Observacao: sirva os arquivos por HTTP para o `fetch` funcionar corretamente.
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Abra `http://localhost:8000` no navegador.
+Depois abra `http://localhost:8000`.

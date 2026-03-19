@@ -1,35 +1,38 @@
-// Espera o HTML da página ser completamente carregado para executar o código
 document.addEventListener('DOMContentLoaded', () => {
-
     const gameListContainer = document.getElementById('game-list');
     const sortButtons = document.querySelectorAll('.sort-button');
-    const sortState = {
-        column: 'nome',
-        direction: 'asc'
+    const searchInput = document.getElementById('search-input');
+    const consoleFilter = document.getElementById('console-filter');
+    const resultsCount = document.getElementById('results-count');
+
+    const state = {
+        sortColumn: 'nome',
+        sortDirection: 'asc',
+        searchTerm: '',
+        console: 'todos'
     };
+
     let gamesData = [];
 
-    // A função fetch() busca nosso arquivo JSON. É a maneira moderna de fazer requisições web.
     fetch('games.json')
         .then(response => {
-            // Quando a resposta chegar, verificamos se deu tudo certo
             if (!response.ok) {
-                throw new Error('Não foi possível carregar o arquivo de jogos.');
+                throw new Error('Nao foi possivel carregar o arquivo de jogos.');
             }
-            // Convertemos a resposta em formato JSON para que o JavaScript possa usar
+
             return response.json();
         })
         .then(games => {
             gamesData = games;
+            populateConsoleFilter(gamesData);
             updateSortIndicators();
             renderTable();
         })
         .catch(error => {
-            // Se algo der errado (ex: arquivo não encontrado), mostramos um erro no console
             console.error('Erro ao buscar os jogos:', error);
             gameListContainer.innerHTML = `
                 <tr>
-                    <td colspan="4">Não foi possível carregar a lista de jogos. Tente novamente mais tarde.</td>
+                    <td colspan="4">Nao foi possivel carregar a lista de jogos.</td>
                 </tr>
             `;
         });
@@ -37,74 +40,107 @@ document.addEventListener('DOMContentLoaded', () => {
     sortButtons.forEach(button => {
         button.addEventListener('click', () => {
             const column = button.dataset.column;
-            if (sortState.column === column) {
-                sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+
+            if (state.sortColumn === column) {
+                state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
             } else {
-                sortState.column = column;
-                sortState.direction = 'asc';
+                state.sortColumn = column;
+                state.sortDirection = 'asc';
             }
+
             updateSortIndicators();
             renderTable();
         });
     });
 
-    function renderTable() {
-        // Agora que temos a lista de jogos, limpamos qualquer conteúdo que já estivesse lá
-        gameListContainer.innerHTML = '';
+    searchInput.addEventListener('input', event => {
+        state.searchTerm = event.target.value.trim().toLowerCase();
+        renderTable();
+    });
 
-        const sortedGames = [...gamesData].sort((a, b) => {
-            const valueA = a[sortState.column] ?? '';
-            const valueB = b[sortState.column] ?? '';
-            const directionMultiplier = sortState.direction === 'asc' ? 1 : -1;
+    consoleFilter.addEventListener('change', event => {
+        state.console = event.target.value;
+        renderTable();
+    });
 
-            if (sortState.column === 'ano') {
+    function populateConsoleFilter(games) {
+        const consoles = [...new Set(games.map(game => game.console))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+        consoles.forEach(consoleName => {
+            const option = document.createElement('option');
+            option.value = consoleName;
+            option.textContent = consoleName;
+            consoleFilter.appendChild(option);
+        });
+    }
+
+    function getVisibleGames() {
+        const filteredGames = gamesData.filter(game => {
+            const matchesConsole = state.console === 'todos' || game.console === state.console;
+            const searchBase = `${game.nome} ${game.console} ${game.descricao} ${game.ano}`.toLowerCase();
+            const matchesSearch = !state.searchTerm || searchBase.includes(state.searchTerm);
+
+            return matchesConsole && matchesSearch;
+        });
+
+        return filteredGames.sort((a, b) => {
+            const valueA = a[state.sortColumn] ?? '';
+            const valueB = b[state.sortColumn] ?? '';
+            const directionMultiplier = state.sortDirection === 'asc' ? 1 : -1;
+
+            if (state.sortColumn === 'ano') {
                 return (Number(valueA) - Number(valueB)) * directionMultiplier;
             }
 
-            const normalizedA = valueA.toString().toLowerCase();
-            const normalizedB = valueB.toString().toLowerCase();
-
-            if (normalizedA < normalizedB) {
-                return -1 * directionMultiplier;
-            }
-            if (normalizedA > normalizedB) {
-                return 1 * directionMultiplier;
-            }
-            return 0;
+            return valueA.toString().localeCompare(valueB.toString(), 'pt-BR', { sensitivity: 'base' }) * directionMultiplier;
         });
+    }
 
-        // Para cada jogo na nossa lista, criamos uma linha na tabela
-        sortedGames.forEach(game => {
+    function renderTable() {
+        const visibleGames = getVisibleGames();
+
+        resultsCount.textContent = `${visibleGames.length} ${visibleGames.length === 1 ? 'titulo' : 'titulos'}`;
+        gameListContainer.innerHTML = '';
+
+        if (!visibleGames.length) {
+            gameListContainer.innerHTML = `
+                <tr>
+                    <td colspan="4">Nenhum jogo encontrado.</td>
+                </tr>
+            `;
+            return;
+        }
+
+        visibleGames.forEach(game => {
             const row = document.createElement('tr');
-
-            // Usamos template literals (crases ``) para construir o HTML da linha facilmente
             row.innerHTML = `
                 <td>${game.nome}</td>
-                <td><strong>${game.console}</strong></td>
+                <td><span class="console-pill">${game.console}</span></td>
                 <td>${game.descricao}</td>
                 <td>${game.ano}</td>
             `;
-
-            // Adicionamos a linha recém-criada dentro do corpo da tabela
             gameListContainer.appendChild(row);
         });
     }
 
     function updateSortIndicators() {
         sortButtons.forEach(button => {
-            const isActive = button.dataset.column === sortState.column;
+            const isActive = button.dataset.column === state.sortColumn;
             const headerCell = button.closest('th');
+            const label = button.childNodes[0]?.textContent?.trim() || button.textContent.trim();
+
             button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
             button.setAttribute(
                 'aria-label',
                 isActive
-                    ? `Ordenado por ${button.textContent.trim()} (${sortState.direction === 'asc' ? 'A-Z' : 'Z-A'})`
-                    : `Ordenar por ${button.textContent.trim()}`
+                    ? `Ordenado por ${label} (${state.sortDirection === 'asc' ? 'A-Z' : 'Z-A'})`
+                    : `Ordenar por ${label}`
             );
             button.classList.toggle('is-active', isActive);
-            button.dataset.direction = isActive ? sortState.direction : '';
+            button.dataset.direction = isActive ? state.sortDirection : '';
+
             if (headerCell) {
-                headerCell.setAttribute('aria-sort', isActive ? (sortState.direction === 'asc' ? 'ascending' : 'descending') : 'none');
+                headerCell.setAttribute('aria-sort', isActive ? (state.sortDirection === 'asc' ? 'ascending' : 'descending') : 'none');
             }
         });
     }
