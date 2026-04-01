@@ -2,6 +2,12 @@
 
 Site estatico para catalogar jogos marcantes que continuam presos aos seus consoles originais.
 
+## GitHub Pages
+
+A versao publicada no GitHub Pages pode ser acessada em:
+
+- https://lapide66.github.io/ConsoleLocked/
+
 ## O que mudou na interface
 
 - Hero inicial com identidade visual mais forte.
@@ -18,12 +24,36 @@ Site estatico para catalogar jogos marcantes que continuam presos aos seus conso
 - `script.js`: carregamento dos dados, filtros, metricas e ordenacao.
 - `games.json`: lista de jogos exibidos.
 
-## Como executar localmente
+## Como subir o projeto localmente (apos clonar o repositorio)
 
-> Observacao: sirva os arquivos por HTTP para o `fetch` funcionar corretamente.
+Este projeto nao precisa de build nem de instalacao de dependencias. Basta servir os arquivos estaticos por HTTP para o `fetch` do `games.json` funcionar.
+
+### 1) Clonar o repositorio
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd ConsoleLocked
+```
+
+### 2) Iniciar um servidor local
+
+Opcao recomendada (Python 3):
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Depois abra `http://localhost:8000`.
+Opcao alternativa (Node.js com `serve`):
+
+```bash
+npx serve .
+```
+
+### 3) Abrir no navegador
+
+- Se usou Python: `http://localhost:8000`
+- Se usou `npx serve`: use a URL exibida no terminal (geralmente `http://localhost:3000`)
+
+### 4) Encerrar o servidor
+
+No terminal onde o servidor esta rodando, pressione `Ctrl + C`.
