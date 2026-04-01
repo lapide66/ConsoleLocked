@@ -6,7 +6,7 @@ Site estatico para catalogar jogos marcantes que continuam presos aos seus conso
 
 A versao publicada no GitHub Pages pode ser acessada em:
 
-- https://consolelocked.github.io/ConsoleLocked/
+- https://lapide66.github.io/ConsoleLocked/
 
 ## O que mudou na interface
 
