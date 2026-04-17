@@ -1,6 +1,4 @@
-# ConsoleLocked
-
-![Version](https://img.shields.io/badge/version-1.0-blue)
+# ConsoleLocked — Documentação
 
 > Um catálogo minimalista de jogos marcantes que continuam presos aos seus consoles originais — sem ports, sem remasters, sem segunda chance.
 
@@ -8,9 +6,9 @@
 
 ---
 
-## Sobre o projeto
+## Visão Geral
 
-ConsoleLocked é um site estático que cataloga jogos que, por razões técnicas, comerciais ou de licenciamento, nunca receberam versões para outras plataformas. O objetivo é preservar a memória desses títulos e facilitar a descoberta de joias esquecidas do mundo dos videogames.
+ConsoleLocked é uma aplicação web estática que cataloga jogos que, por razões técnicas, comerciais ou de licenciamento, nunca receberam versões para outras plataformas. O objetivo é preservar a memória desses títulos e facilitar a descoberta de joias esquecidas do mundo dos videogames.
 
 Não há backend, banco de dados ou dependências externas. Tudo roda no navegador com HTML, CSS e JavaScript puro.
 
@@ -18,48 +16,18 @@ Não há backend, banco de dados ou dependências externas. Tudo roda no navegad
 
 ## Funcionalidades
 
-- **Busca em tempo real** — filtra por nome, console, descrição ou ano enquanto você digita
-- **Filtro por console** — selecione um console específico para ver apenas seus jogos
-- **Ordenação por coluna** — clique nos cabeçalhos da tabela para ordenar por qualquer campo (A-Z ou Z-A)
-- **Contador de resultados** — exibe quantos títulos estão visíveis com os filtros ativos
-- **Layout responsivo** — funciona bem em desktop e mobile
-- **Acessibilidade** — navegação por teclado, `aria-label`, `aria-sort` e indicadores visuais de ordenação
+| Funcionalidade | Descrição |
+|---|---|
+| Busca em tempo real | Filtra por nome, console, descrição ou ano enquanto você digita |
+| Filtro por console | Dropdown para exibir apenas jogos de um console específico |
+| Ordenação por coluna | Clique em qualquer cabeçalho da tabela para ordenar crescente ou decrescente |
+| Contador de resultados | Exibe quantos títulos correspondem aos filtros ativos |
+| Layout responsivo | Funciona bem em desktop e mobile |
+| Acessibilidade | Navegação por teclado, `aria-label`, `aria-sort` e indicadores visuais de ordenação |
 
 ---
 
-## Estrutura do projeto
-
-```
-ConsoleLocked/
-├── index.html    # Estrutura da página (hero, filtros, tabela)
-├── style.css     # Tema visual, layout responsivo e animações
-├── script.js     # Lógica de filtros, ordenação e renderização
-└── games.json    # Lista de jogos exibidos no catálogo
-```
-
-### `games.json` — formato de um jogo
-
-```json
-{
-  "nome": "Bloodborne",
-  "console": "PlayStation 4",
-  "ano": 2015,
-  "descricao": "RPG de ação com atmosfera gótica e combates intensos.",
-  "imagem": ""
-}
-```
-
-| Campo      | Tipo   | Descrição                                      |
-|------------|--------|------------------------------------------------|
-| `nome`     | string | Título do jogo                                 |
-| `console`  | string | Console original onde o jogo foi lançado       |
-| `ano`      | number | Ano de lançamento                              |
-| `descricao`| string | Breve descrição do jogo                        |
-| `imagem`   | string | URL da imagem (opcional, não usado atualmente) |
-
----
-
-## Como rodar localmente
+## Como Rodar Localmente
 
 Este projeto não precisa de build nem de instalação de dependências. Basta servir os arquivos por HTTP para que o `fetch` do `games.json` funcione corretamente.
 
@@ -77,32 +45,48 @@ cd ConsoleLocked
 python3 -m http.server 8000
 ```
 
-**Node.js com `serve`:**
-```bash
-npx serve .
-```
-
 **VS Code:** instale a extensão [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) e clique em "Go Live".
 
 ### 3. Abrir no navegador
 
-| Método     | URL                        |
-|------------|----------------------------|
-| Python     | `http://localhost:8000`    |
-| npx serve  | `http://localhost:3000`    |
-| Live Server| `http://localhost:5500`    |
-
-### 4. Encerrar o servidor
-
-Pressione `Ctrl + C` no terminal onde o servidor está rodando.
+| Método | URL |
+|---|---|
+| Python | `http://localhost:8000` |
+| npx serve | `http://localhost:3000` |
+| Live Server | `http://localhost:5500` |
 
 > ⚠️ Abrir o `index.html` diretamente pelo navegador (protocolo `file://`) não funciona porque o `fetch` é bloqueado por restrições de segurança do browser.
 
 ---
 
-## Como adicionar um jogo
+## Estrutura do Projeto
 
-Edite o arquivo `games.json` e adicione um novo objeto ao array seguindo o formato acima. O site atualiza automaticamente ao recarregar a página.
+```
+ConsoleLocked/
+├── index.html      # Estrutura da página: hero, filtros, tabela
+├── style.css       # Tema visual, layout responsivo e animações
+├── script.js       # Lógica de filtros, ordenação e renderização
+├── games.json      # Dados do catálogo de jogos
+├── docs/
+│   └── README.md   # Este arquivo de documentação
+└── release/        # Snapshots versionados (ignorado pelo git)
+```
+
+---
+
+## Catálogo de Jogos
+
+O catálogo é alimentado pelo `games.json`. Entradas exemplo (v1.0):
+
+| Jogo | Console | Ano |
+|---|---|---|
+| Yoshi's Woolly World | Wii U | 2015 |
+| Eternal Darkness: Sanity's Requiem | GameCube | 2002 |
+
+
+### Como adicionar um jogo
+
+Edite o `games.json` e adicione um novo objeto ao array:
 
 ```json
 {
@@ -114,36 +98,56 @@ Edite o arquivo `games.json` e adicione um novo objeto ao array seguindo o forma
 }
 ```
 
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `nome` | string | Título do jogo |
+| `console` | string | Console original |
+| `ano` | number | Ano de lançamento |
+| `descricao` | string | Breve descrição |
+| `imagem` | string | URL da imagem (opcional, não usado) |
+
+O site atualiza automaticamente ao recarregar a página.
+
 ---
 
-## Tecnologias
+## Detalhes Técnicos
 
-- HTML5 semântico
-- CSS3 (variáveis, grid, media queries, pseudo-elementos)
-- JavaScript ES6+ (fetch, Set, arrow functions, template literals)
+### Stack
+
+- **HTML5** — marcação semântica (`<main>`, `<header>`, `<section>`, `<table>`)
+- **CSS3** — variáveis customizadas (design tokens), CSS Grid, media queries, pseudo-elementos
+- **JavaScript ES6+** — `fetch`, `Set`, arrow functions, template literals
 - Sem frameworks, sem dependências, sem build step
 
----
+### Arquitetura
 
-## Deploy
+O `script.js` mantém um objeto de estado simples:
 
-O projeto é publicado automaticamente via **GitHub Pages** a partir da branch `main`. Qualquer push para `main` atualiza o site em alguns segundos.
+```js
+const state = {
+  sortColumn: 'nome',
+  sortDirection: 'asc',
+  searchTerm: '',
+  console: 'todos'
+};
+```
 
-Para habilitar o GitHub Pages no seu fork:
-1. Vá em **Settings → Pages**
-2. Em "Source", selecione a branch `main` e a pasta `/ (root)`
-3. Clique em **Save**
+A cada interação do usuário (busca, filtro, ordenação), `renderTable()` re-renderiza o `<tbody>` a partir do array `gamesData` em memória, filtrado e ordenado conforme o `state`. O dropdown de consoles é populado dinamicamente a partir dos valores únicos de console no `games.json`.
+
+### Acessibilidade
+
+- Todos os elementos interativos são navegáveis por teclado
+- Botões de ordenação usam `aria-pressed` e `aria-label` com o estado atual
+- Cabeçalhos da tabela usam `aria-sort` (`ascending` / `descending` / `none`)
+- O contador de resultados usa `aria-live="polite"` para anúncios em leitores de tela
+- O layout mobile usa atributos `data-label` para exibir os nomes das colunas inline
+
+### Comportamento Responsivo
+
+Em telas `≤ 720px`, a tabela muda para um layout de blocos empilhados — cada linha vira um card e os cabeçalhos de coluna ficam ocultos. Os rótulos são injetados via CSS `::before` usando atributos `data-label` em cada `<td>`.
 
 ---
 
 ## Licença
 
-Este projeto é de uso pessoal e educacional. Os nomes e títulos dos jogos pertencem aos seus respectivos detentores de direitos.
-
----
-
-## Version History
-
-| Version | Date | Type | Description |
-|---------|------|------|-------------|
-| v1.0 | 2025-07-14 | docs | Adds project documentation (`docs/README.md`) and release snapshot |
+Uso pessoal e educacional. Os nomes e títulos dos jogos pertencem aos seus respectivos detentores de direitos.
