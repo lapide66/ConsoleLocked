@@ -1,5 +1,7 @@
 # ConsoleLocked
 
+![Version](https://img.shields.io/badge/version-1.0-blue)
+
 > Um catálogo minimalista de jogos marcantes que continuam presos aos seus consoles originais — sem ports, sem remasters, sem segunda chance.
 
 🔗 **Acesse online:** [lapide66.github.io/ConsoleLocked](https://lapide66.github.io/ConsoleLocked/)
@@ -137,3 +139,11 @@ Para habilitar o GitHub Pages no seu fork:
 ## Licença
 
 Este projeto é de uso pessoal e educacional. Os nomes e títulos dos jogos pertencem aos seus respectivos detentores de direitos.
+
+---
+
+## Version History
+
+| Version | Date | Type | Description |
+|---------|------|------|-------------|
+| v1.0 | 2025-07-14 | docs | Adds project documentation (`docs/README.md`) and release snapshot |

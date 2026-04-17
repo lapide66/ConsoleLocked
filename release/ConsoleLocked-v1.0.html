@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catalogo minimalista de jogos presos aos seus consoles originais.">
+    <meta name="theme-color" content="#0d0f14">
+    <title>ConsoleLocked</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <main class="app-shell">
+        <header class="hero">
+            <p class="hero__kicker">Retro Console Archive</p>
+            <h1>ConsoleLocked</h1>
+            <p class="hero__lede">
+                Um catalogo direto ao ponto para explorar jogos que nunca sairam do console original.
+            </p>
+        </header>
+
+        <section class="filter-panel" aria-label="Filtros do catálogo">
+            <label class="field" for="search-input">
+                <span>Buscar</span>
+                <input id="search-input" type="search" placeholder="Nome, console, descricao ou ano" autocomplete="off">
+            </label>
+
+            <label class="field" for="console-filter">
+                <span>Console</span>
+                <select id="console-filter">
+                    <option value="todos">Todos</option>
+                </select>
+            </label>
+        </section>
+
+        <section class="catalog" aria-label="Catálogo de jogos">
+            <div class="catalog__meta">
+                <p id="results-count" aria-live="polite">0 titulos</p>
+            </div>
+
+            <div class="table-shell">
+                <table class="game-table" aria-label="Lista de jogos presos em seus consoles originais">
+                    <thead>
+                        <tr>
+                            <th>
+                                <button class="sort-button" type="button" data-column="nome">
+                                    Jogo
+                                    <span class="sort-indicator" aria-hidden="true"></span>
+                                </button>
+                            </th>
+                            <th>
+                                <button class="sort-button" type="button" data-column="console">
+                                    Console
+                                    <span class="sort-indicator" aria-hidden="true"></span>
+                                </button>
+                            </th>
+                            <th>
+                                <button class="sort-button" type="button" data-column="descricao">
+                                    Descricao
+                                    <span class="sort-indicator" aria-hidden="true"></span>
+                                </button>
+                            </th>
+                            <th>
+                                <button class="sort-button" type="button" data-column="ano">
+                                    Ano
+                                    <span class="sort-indicator" aria-hidden="true"></span>
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="game-list">
+                        <tr>
+                            <td colspan="4">Carregando jogos...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js" defer></script>
+    <noscript>
+        <p style="text-align:center;padding:2rem;font-family:sans-serif;">
+            Este site requer JavaScript para exibir o catálogo de jogos. Por favor, habilite o JavaScript no seu navegador.
+        </p>
+    </noscript>
+</body>
+</html>
