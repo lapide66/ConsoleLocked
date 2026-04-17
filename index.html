@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
 </head>
 <body>
     <main class="app-shell">
@@ -21,13 +22,13 @@
             </p>
         </header>
 
-        <section class="filter-panel" aria-label="Filtros do catalogo">
-            <label class="field">
+        <section class="filter-panel" aria-label="Filtros do catálogo">
+            <label class="field" for="search-input">
                 <span>Buscar</span>
                 <input id="search-input" type="search" placeholder="Nome, console, descricao ou ano" autocomplete="off">
             </label>
 
-            <label class="field">
+            <label class="field" for="console-filter">
                 <span>Console</span>
                 <select id="console-filter">
                     <option value="todos">Todos</option>
@@ -35,9 +36,9 @@
             </label>
         </section>
 
-        <section class="catalog" aria-label="Catalogo de jogos">
+        <section class="catalog" aria-label="Catálogo de jogos">
             <div class="catalog__meta">
-                <p id="results-count">0 titulos</p>
+                <p id="results-count" aria-live="polite">0 titulos</p>
             </div>
 
             <div class="table-shell">
@@ -81,5 +82,10 @@
     </main>
 
     <script src="script.js" defer></script>
+    <noscript>
+        <p style="text-align:center;padding:2rem;font-family:sans-serif;">
+            Este site requer JavaScript para exibir o catálogo de jogos. Por favor, habilite o JavaScript no seu navegador.
+        </p>
+    </noscript>
 </body>
 </html>

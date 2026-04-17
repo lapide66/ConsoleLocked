@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Erro ao buscar os jogos:', error);
             gameListContainer.innerHTML = `
                 <tr>
-                    <td colspan="4">Nao foi possivel carregar a lista de jogos.</td>
+                    <td colspan="4" role="alert">Nao foi possivel carregar a lista de jogos.</td>
                 </tr>
             `;
         });
@@ -113,11 +113,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         visibleGames.forEach(game => {
             const row = document.createElement('tr');
+            // O campo `imagem` existe no JSON mas está vazio em todos os registros — ignorado intencionalmente.
             row.innerHTML = `
-                <td>${game.nome}</td>
-                <td><span class="console-pill">${game.console}</span></td>
-                <td>${game.descricao}</td>
-                <td>${game.ano}</td>
+                <td data-label="Jogo">${game.nome}</td>
+                <td data-label="Console"><span class="console-pill">${game.console}</span></td>
+                <td data-label="Descrição">${game.descricao}</td>
+                <td data-label="Ano">${game.ano}</td>
             `;
             gameListContainer.appendChild(row);
         });

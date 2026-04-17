@@ -19,6 +19,7 @@
     --accent:      #7c3aed;
     --accent-dim:  rgba(124, 58, 237, 0.15);
     --accent-glow: rgba(124, 58, 237, 0.25);
+    --accent-border: rgba(124, 58, 237, 0.2);
     --accent-text: #a78bfa;
 
     /* Misc */
@@ -240,7 +241,7 @@ body {
     align-items: center;
     padding: 4px 10px;
     background: var(--accent-dim);
-    border: 1px solid rgba(124, 58, 237, 0.2);
+    border: 1px solid var(--accent-border);
     border-radius: 4px;
     color: var(--accent-text);
     font-size: 0.78rem;
@@ -373,6 +374,22 @@ body {
         padding: 0;
         border: none;
         font-size: 0.875rem;
+    }
+
+    /* Exibe o label semântico antes do valor no mobile */
+    .game-table td[data-label]::before {
+        content: attr(data-label) ": ";
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+
+    .game-table td[data-label="Jogo"]::before {
+        display: none; /* O nome do jogo já é o título visual da linha */
     }
 
     .game-table td + td {
