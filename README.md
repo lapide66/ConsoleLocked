@@ -134,15 +134,7 @@ const state = {
 
 A cada interação do usuário (busca, filtro, ordenação), `renderTable()` re-renderiza o `<tbody>` a partir do array `gamesData` em memória, filtrado e ordenado conforme o `state`. O dropdown de consoles é populado dinamicamente a partir dos valores únicos de console no `games.json`.
 
-### Acessibilidade
-
-- Todos os elementos interativos são navegáveis por teclado
-- Botões de ordenação usam `aria-pressed` e `aria-label` com o estado atual
-- Cabeçalhos da tabela usam `aria-sort` (`ascending` / `descending` / `none`)
-- O contador de resultados usa `aria-live="polite"` para anúncios em leitores de tela
-- O layout mobile usa atributos `data-label` para exibir os nomes das colunas inline
-
-### Comportamento Responsivo
+## Comportamento Responsivo
 
 Em telas `≤ 720px`, a tabela muda para um layout de blocos empilhados — cada linha vira um card e os cabeçalhos de coluna ficam ocultos. Os rótulos são injetados via CSS `::before` usando atributos `data-label` em cada `<td>`.
 
