@@ -1,18 +1,33 @@
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
 :root {
-    --bg: #c8c2b7;
-    --bg-soft: #e2dbcf;
-    --panel: #d3cec4;
-    --panel-2: #e8e2d8;
-    --line: #9a9488;
-    --text: #2e3440;
-    --muted: #5f6775;
-    --accent: #a96a2d;
-    --accent-soft: rgba(169, 106, 45, 0.12);
-    --accent-strong: #6b7f99;
-    --shadow: 0 18px 50px rgba(58, 51, 43, 0.18);
+    /* Backgrounds */
+    --bg:          #0d0f14;
+    --bg-surface:  #13161f;
+    --bg-elevated: #1a1d26;
+    --bg-hover:    #1f2230;
+
+    /* Borders */
+    --border:      #252836;
+    --border-soft: #1e2130;
+
+    /* Text */
+    --text:        #e8eaf0;
+    --text-muted:  #6b7280;
+    --text-dim:    #9ca3af;
+
+    /* Accent — roxo vibrante */
+    --accent:      #7c3aed;
+    --accent-dim:  rgba(124, 58, 237, 0.15);
+    --accent-glow: rgba(124, 58, 237, 0.25);
+    --accent-text: #a78bfa;
+
+    /* Misc */
+    --radius:      6px;
+    --transition:  150ms ease;
 }
 
-* {
+/* ─── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
     box-sizing: border-box;
 }
 
@@ -23,136 +38,146 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
-    background:
-        radial-gradient(circle at top, rgba(107, 127, 153, 0.16), transparent 32%),
-        linear-gradient(180deg, #d4cdc1 0%, #c8c2b7 100%);
+    background-color: var(--bg);
     color: var(--text);
-    font-family: "Lucida Console", "Courier New", monospace;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background:
-        linear-gradient(rgba(46, 52, 64, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(46, 52, 64, 0.025) 1px, transparent 1px);
-    background-size: 100% 4px, 4px 100%;
-    opacity: 0.16;
-}
-
+/* ─── Layout Shell ───────────────────────────────────────────────────────── */
 .app-shell {
-    position: relative;
-    z-index: 1;
-    width: min(980px, calc(100% - 28px));
+    width: min(1000px, calc(100% - 32px));
     margin: 0 auto;
-    padding: 40px 0 56px;
+    padding: 48px 0 72px;
 }
 
-.hero,
-.filter-panel,
-.catalog {
-    border: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(223, 216, 205, 0.98), rgba(211, 204, 193, 0.98));
-    box-shadow: var(--shadow);
-}
-
+/* ─── Hero ───────────────────────────────────────────────────────────────── */
 .hero {
-    padding: 28px;
-    margin-bottom: 18px;
+    padding: 40px 32px;
+    margin-bottom: 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
 
 .hero__kicker {
-    margin: 0 0 12px;
-    color: var(--accent);
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
+    margin: 0 0 10px;
+    color: var(--accent-text);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
 }
 
 .hero h1 {
     margin: 0;
-    color: var(--accent-strong);
-    font-size: clamp(2.4rem, 7vw, 4.4rem);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700;
     line-height: 1;
-    text-transform: uppercase;
-    text-shadow: 0 0 14px rgba(107, 127, 153, 0.12);
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+
+.hero h1 span {
+    color: var(--accent-text);
 }
 
 .hero__lede {
-    max-width: 56ch;
+    max-width: 52ch;
     margin: 14px 0 0;
-    color: var(--muted);
-    line-height: 1.8;
-    font-size: 0.96rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
 }
 
+/* ─── Filter Panel ───────────────────────────────────────────────────────── */
 .filter-panel {
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(180px, 0.7fr);
-    gap: 14px;
-    padding: 18px;
-    margin-bottom: 18px;
+    grid-template-columns: minmax(0, 1.6fr) minmax(180px, 0.6fr);
+    gap: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
 
 .field {
     display: grid;
-    gap: 8px;
+    gap: 6px;
 }
 
 .field span {
-    color: var(--muted);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
 .field input,
 .field select {
     width: 100%;
-    min-height: 48px;
+    min-height: 44px;
     padding: 0 14px;
-    border: 1px solid var(--line);
-    background: var(--panel-2);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     color: var(--text);
     font: inherit;
-    border-radius: 0;
+    font-size: 0.9rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
 }
 
 .field input::placeholder {
-    color: #7a7b77;
+    color: var(--text-muted);
 }
 
 .field input:focus,
-.field select:focus,
-.sort-button:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+.field select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
+/* ─── Catalog ────────────────────────────────────────────────────────────── */
 .catalog {
-    padding: 12px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
 }
 
 .catalog__meta {
     display: flex;
     justify-content: flex-end;
-    padding: 6px 6px 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-soft);
 }
 
 .catalog__meta p {
     margin: 0;
-    color: var(--muted);
-    font-size: 0.82rem;
-    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
+/* ─── Table ──────────────────────────────────────────────────────────────── */
 .table-shell {
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: var(--bg-soft);
+    overflow-x: auto;
 }
 
 .game-table {
@@ -160,106 +185,167 @@ body::before {
     border-collapse: collapse;
 }
 
-.game-table th,
-.game-table td {
-    padding: 16px 14px;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-    vertical-align: top;
-}
-
 .game-table th {
     padding: 0;
-    background: #bbc3cc;
-    color: #2f4054;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
 }
 
-.game-table tbody tr:nth-child(even) {
-    background: rgba(107, 127, 153, 0.05);
+.game-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-soft);
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.9rem;
+}
+
+.game-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.game-table tbody tr {
+    transition: background var(--transition);
 }
 
 .game-table tbody tr:hover {
-    background: rgba(169, 106, 45, 0.08);
+    background: var(--bg-hover);
 }
 
 .game-table td:first-child {
-    color: #243140;
-    font-weight: 700;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.92rem;
 }
 
 .game-table td:nth-child(2) {
-    width: 148px;
+    width: 160px;
+}
+
+.game-table td:nth-child(3) {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    line-height: 1.6;
 }
 
 .game-table td:last-child {
-    width: 86px;
-    color: var(--accent);
+    width: 80px;
+    color: var(--accent-text);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
 }
 
+/* ─── Console Pill ───────────────────────────────────────────────────────── */
 .console-pill {
     display: inline-flex;
     align-items: center;
-    padding: 6px 10px;
-    border: 1px solid rgba(107, 127, 153, 0.24);
-    background: var(--accent-soft);
-    color: #5b6f88;
-    font-size: 0.84rem;
+    padding: 4px 10px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: 4px;
+    color: var(--accent-text);
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
+/* ─── Sort Button ────────────────────────────────────────────────────────── */
 .sort-button {
     width: 100%;
     border: 0;
     background: transparent;
-    color: inherit;
+    color: var(--text-muted);
     font: inherit;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    padding: 16px 14px;
+    gap: 8px;
+    padding: 14px 20px;
     cursor: pointer;
     text-align: left;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    transition: color var(--transition), background var(--transition);
+}
+
+.sort-button:hover {
+    color: var(--text);
+    background: var(--bg-hover);
 }
 
 .sort-button.is-active {
-    background: rgba(107, 127, 153, 0.08);
+    color: var(--accent-text);
+    background: var(--accent-dim);
+}
+
+.sort-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+/* ─── Sort Indicator ─────────────────────────────────────────────────────── */
+.sort-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: 0.4;
+    transition: opacity var(--transition);
 }
 
 .sort-indicator::after {
-    content: "--";
-    color: var(--muted);
-    font-size: 0.72rem;
+    content: "↕";
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.sort-button.is-active .sort-indicator {
+    opacity: 1;
 }
 
 .sort-button[data-direction="asc"] .sort-indicator::after {
-    content: "A-Z";
-    color: var(--accent);
+    content: "↑";
+    color: var(--accent-text);
 }
 
 .sort-button[data-direction="desc"] .sort-indicator::after {
-    content: "Z-A";
-    color: var(--accent);
+    content: "↓";
+    color: var(--accent-text);
 }
 
+/* ─── Empty / Loading State ──────────────────────────────────────────────── */
+.game-table td[colspan] {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
     .app-shell {
-        width: min(100% - 16px, 980px);
-        padding-top: 16px;
+        width: calc(100% - 24px);
+        padding-top: 24px;
+        padding-bottom: 48px;
     }
 
-    .hero,
-    .filter-panel,
-    .catalog {
-        padding-left: 14px;
-        padding-right: 14px;
+    .hero {
+        padding: 28px 20px;
     }
 
     .filter-panel {
         grid-template-columns: 1fr;
+        padding: 16px 20px;
     }
 
+    .catalog__meta {
+        padding: 12px 16px;
+    }
+
+    /* Stack table on mobile */
     .game-table,
     .game-table thead,
     .game-table tbody,
@@ -274,17 +360,37 @@ body::before {
     }
 
     .game-table tbody tr {
-        padding: 14px 0;
-        border-bottom: 1px solid var(--line);
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .game-table tbody tr:last-child {
+        border-bottom: none;
     }
 
     .game-table td {
-        width: 100%;
+        width: 100% !important;
         padding: 0;
-        border: 0;
+        border: none;
+        font-size: 0.875rem;
     }
 
     .game-table td + td {
-        margin-top: 10px;
+        margin-top: 8px;
+    }
+
+    .game-table td:first-child {
+        font-size: 0.95rem;
+    }
+
+    .game-table td:last-child {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
     }
 }
